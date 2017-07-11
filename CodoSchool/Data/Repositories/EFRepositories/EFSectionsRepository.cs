@@ -1,0 +1,20 @@
+﻿using CodoSchool.Data.Abstractions;
+using CodoSchool.EntityBase.Extensions;
+using CodoSchool.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace CodoSchool.Data.Repositories.EFRepositories
+{
+    public class EFSectionsRepository
+    {
+        public class SectionsEFRepository : EFRecursiveRepository<Section>, ISectionsRepository
+        {
+            public SectionsEFRepository(ApplicationDbContext context) : base(context)
+            {
+            }
+        }
+    }
+}
