@@ -1,0 +1,6 @@
+Themes:
+	1.Domain Model
+		1)Hierarchy
+			a) Issue with hierarchy ordering. How to implement OrderHierarchyBy, ThenHierarchyBy correctly?
+			How OrderBy and ThenBy implemented in LINQ? (My implementation of OrderHierarchyBy in CodoSchool.EntityBase.Linq.Extensions -> EntityExtensionsProvider). What is IOrderedEnumerable???
+			b) Eager loading in EFCore ( as lazy loading is not yet implemented ). <question about depth of loading child objects - only immediate children or full hierarchy>?
