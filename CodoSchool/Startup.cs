@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using CodoSchool.Data;
 using CodoSchool.Models;
 using CodoSchool.Services;
+using CodoSchool.Data.Abstractions;
 
 namespace CodoSchool
 {
@@ -46,12 +47,21 @@ namespace CodoSchool
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddMvc();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<MenuService>();
+            services.AddTransient<LessonsService>();
+            services.AddTransient<AdminService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

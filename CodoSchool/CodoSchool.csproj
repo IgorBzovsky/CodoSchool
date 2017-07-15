@@ -11,7 +11,17 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-CodoSchool-85499d5f-01e5-4454-8832-3c98e65f61db</UserSecretsId>
   </PropertyGroup>
+
   <ItemGroup>
+    <Content Include="wwwroot\fonts\whitrabt.eot" />
+    <Content Include="wwwroot\fonts\whitrabt.otf" />
+    <Content Include="wwwroot\fonts\whitrabt.ttf" />
+    <Content Include="wwwroot\fonts\whitrabt.woff" />
+    <Content Include="wwwroot\js\animation.js" />
+    <Content Include="wwwroot\js\sidebar-menu.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.1.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
@@ -36,6 +46,10 @@
   <ItemGroup>
     <ProjectReference Include="..\CodoSchool.EntityBase.Extensions\CodoSchool.EntityBase.Linq.Extensions.csproj" />
     <ProjectReference Include="..\CodoSchool.EntityBase\CodoSchool.EntityBase.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Admin\" />
+    <Folder Include="Views\Sections\" />
   </ItemGroup>
 
 </Project>

@@ -16,6 +16,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    @RenderSection("Styles", false)
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
@@ -28,13 +29,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">CodoSchool</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><span id="brand-animated">_</span><span class="codo">Codo</span><span class="school">School</span></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">[Home]</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="About">[About]</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">[Contact]</a></li>
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
@@ -52,6 +53,13 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script>
+            $(document).ready(function () {
+                setInterval(function () {
+                    $("#brand-animated").toggleClass("brand-toggle-class");
+                }, 800);
+            });
+        </script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -67,6 +75,13 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <script>
+            $(document).ready(function () {
+                setInterval(function () {
+                    $("#brand-animated").toggleClass("brand-toggle-class");
+                }, 800);
+            });
+        </script>
     </environment>
 
     @RenderSection("Scripts", required: false)

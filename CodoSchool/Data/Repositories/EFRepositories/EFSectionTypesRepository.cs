@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CodoSchool.Data.Repositories.EFRepositories
 {
-    public class SectionTypesEFRepository : EFRepository<SectionType>, ISectionTypesRepository
+    public class EFSectionTypesRepository : EFRepository<SectionType>, ISectionTypesRepository
     {
-        public SectionTypesEFRepository(ApplicationDbContext context) : base(context)
+        public EFSectionTypesRepository(ApplicationDbContext context) : base(context)
         {
         }
     }

@@ -8,5 +8,8 @@ namespace CodoSchool.Data.Abstractions
 {
     public interface ISectionsRepository : IRepository<Section>
     {
+        IEnumerable<Section> GetAllSections();
+        IEnumerable<Section> GetCategoriesAndCourses();
+        IEnumerable<Section> GetCourseLessons(int id);
     }
 }

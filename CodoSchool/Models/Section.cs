@@ -12,7 +12,7 @@ namespace CodoSchool.Models
         public string Description { get; set; }
         public string Content { get; set; }
         public string VideoUrl { get; set; }
-        public int Number { get; set; }
+        public int? Number { get; set; }
 
         public int SectionTypeId { get; set; }
         public virtual SectionType SectionType { get; set; }

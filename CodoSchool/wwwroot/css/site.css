@@ -1,13 +1,109 @@
-﻿body {
+﻿@font-face {
+    font-family: WhiteRabbit;
+    src: url('../fonts/whitrabt.ttf') format('truetype'),
+        url('../fonts/whitrabt.eot') format('embedded-opentype'),
+        url('../fonts/whitrabt.otf') format('opentype'),
+        url('../fonts/whitrabt.woff') format('woff');
+}
+
+body {
+    font-family: WhiteRabbit, Helvetica, sans-serif;
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #62487a;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
+    padding-top: 80px;
     padding-left: 15px;
     padding-right: 15px;
+    color: white;
+}
+
+.block-header {
+    position: absolute;
+    top: -0.70em;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #a3a3a3;
+    background-color: #222;
+    text-transform: uppercase;
+}
+
+/*Navbar*/
+.navbar-inverse {
+    border-color: #4c4c4c;
+    font-size: 1.3em !important;
+}
+.navbar-brand {
+    font-size: 1.7em !important;
+}
+.brand-toggle-class {
+    color: white;
+}
+.navbar-brand > .codo {
+    color: #dce85c;
+}
+.navbar-brand > .school {
+    color: #5276af;
+}
+
+/*Sidebar*/
+.nav-sidebar {
+    position: relative;
+    background-color: #1e1e1e;
+    font-size: 1.2em;
+    min-height: 600px !important;
+    border: 4px double #878787;
+    opacity: 0.8;
+    border-radius: 8px;
+}
+.menu-header {
+    background-color: #1e1e1e;
+    font-size: 0.9em !important;
+}
+.inner-sidebar{
+    margin-top: 30px;
+}
+.nav-sidebar .jqtree-title {
+    color: #5bb6f1 !important;
+}
+.nav-sidebar .jqtree-toggler {
+    color: #9d9d9d !important;
+}
+.nav-sidebar .jqtree-title-folder {
+    text-transform: uppercase !important;
+    color: #a25cf2 !important;
+}
+.nav-sidebar > .inner-sidebar > p {
+    color: #27a52b;
+}
+.js-sidebar-text-animation {
+    min-height: 50px;
+    color: #859900;
+} 
+.typed-cursor {
+    display: none;
+}
+
+/*Content*/
+.main-content {
+    background-color: #62487a !important;
+}
+.content-header {
+    background-color: #333333;
+    font-size: 1em !important;
+}
+.inner-content {
+    position: relative;
+    padding-left: 10%;
+    min-height: 600px !important;
+    border: 4px double #878787;
+    border-radius: 8px;
+    background-color: #333333;
+    opacity: 0.8;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */

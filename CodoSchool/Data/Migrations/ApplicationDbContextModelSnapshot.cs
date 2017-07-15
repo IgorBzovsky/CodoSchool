@@ -113,7 +113,7 @@ namespace CodoSchool.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("Number");
+                    b.Property<int?>("Number");
 
                     b.Property<int?>("ParentId");
 

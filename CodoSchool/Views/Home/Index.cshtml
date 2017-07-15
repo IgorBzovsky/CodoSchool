@@ -1,12 +1,41 @@
 ﻿@{
     ViewData["Title"] = "Codo School";
 }
+@section Styles{
+    <link rel="stylesheet" href="~/lib/jqTree/jqtree.css">
+}
+<div class="row panel main-content">
+    <!------------------Navigation Sidebar---------------------->
+    <aside class="col-xs-4 nav-sidebar" >
+        <div class="block-header menu-header">[Menu]</div>
+        <div class="inner-sidebar">
+            <div class="js-sidebar-text-animation">
+            </div>
+            <div id="menu-tree"></div>
+        </div>
+    </aside>
 
-<div class="row panel">
-    <div id="categories" class="col-xs-3">
-        @await Component.InvokeAsync("NavigationMenu")
-    </div>
-    <div class="col-xs-8">
-    </div>
+    <!---------------------Content Block------------------------->
+    <article class="col-xs-8">
+        <div class="inner-content">
+            <div class="block-header content-header">[Content]</div>
+            <div id="content-block">
+            </div>
+        </div>
+    </article>
 </div> 
+@section Scripts{
+    <script src="~/lib/jqTree/tree.jquery.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/lib/typed.js/lib/typed.js"></script>
+    <script src="~/js/animation.js"></script>
+    <script>
+        $(document).ready(function () { 
+            MenuController.initialize("#menu-tree", "#content-block");
+
+            //Later convert to module for presenting interesting things about programming languages and algorithms. Data has to be supplied by database
+            TextAnimationController.animateText("#js-sidebar-text-animation", ["", "//select what to learn", "//improve your skills"]);
+        });
+    </script>
+}
 
