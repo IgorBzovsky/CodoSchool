@@ -16,7 +16,7 @@ body {
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-top: 80px;
+    padding-top: 30px;
     padding-left: 15px;
     padding-right: 15px;
     color: white;
@@ -33,7 +33,10 @@ body {
 }
 
 .logo {
+    position: relative;
     background-color: #62487a;
+    margin-bottom: 30px;
+    left: 25%;
 }
 
 /*Navbar*/
