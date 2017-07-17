@@ -41,9 +41,9 @@ namespace CodoSchool.Controllers
             return View();
         }
 
-        public string Test(int id)
+        public IActionResult Quiz(int id)
         {
-            return "test";
+            return null;
         }
 
         public IActionResult TextLesson(int id)

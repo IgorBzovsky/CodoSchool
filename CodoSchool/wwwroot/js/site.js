@@ -42,15 +42,20 @@ var MenuController = function () {
                     goToCourse(event.node);
                     break;
                 case "TextLesson":
+                    goToLesson(event.node);
+                    break;
                 case "VideoLesson":
                     goToLesson(event.node);
+                    break;
+                case "Quiz":
+                    goToQuiz(event.node);
                     break;
             }
         });
     }
 
     //Change categories menu for course menu
-    var goToCourse = function(node) {
+    var goToCourse = function (node) {
         $.ajax({
             url: '/api/Menu/' + node.id,
             dataType: 'json',
@@ -62,9 +67,26 @@ var MenuController = function () {
     }
 
     //Loading content of the lesson to the content placeholder
-    var goToLesson = function(node) {
+    var goToLesson = function (node) {
+        
         $.ajax({
             url: '/Home/' + node.sectionType.name + '/' + node.id,
+            dataType: "html",
+            type: 'GET',
+            success: function (data) {
+                $(contentPlaceholderId).html(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+    }
+
+    var goToQuiz = function (node) {
+
+        $.ajax({
+            url: '/Home/Quiz/' + node.id,
             dataType: "html",
             type: 'GET',
             success: function (data) {

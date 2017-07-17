@@ -6,8 +6,8 @@
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "jqTree": "jqtree#1.4.1",
     "typed.js": "v2.0.2",
-    "jquery-treegrid": "treegrid#v0.1.6"
+    "jquery-treegrid": "treegrid#v0.1.6",
+    "jqTree": "jqtree#1.4.1"
   }
 }
