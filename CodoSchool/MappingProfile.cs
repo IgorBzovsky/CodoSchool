@@ -16,20 +16,14 @@ namespace CodoSchool
             CreateMap<SectionType, SectionTypeDto>();
             CreateMap<Section, TextLessonDto>();
             CreateMap<Section, VideoLessonDto>();
-
-
-            //CreateMap<Section, CategoryDto>();
-            //CreateMap<Section, LessonDto>();
-            //CreateMap<Section, SectionDto>().PreserveReferences();
-            //CreateMap<Question, QuestionDto>().PreserveReferences();
-            //CreateMap<Answer, AnswerDto>().PreserveReferences();
-            //CreateMap<SectionType, SectionTypeDto>().PreserveReferences();
-
-            //CreateMap<QuestionDto, Question>().PreserveReferences();
-            //CreateMap<AnswerDto, Answer>().PreserveReferences();
-            //CreateMap<CategoryDto, Section>().PreserveReferences();
-            //CreateMap<SectionDto, Section>().ForMember(x => x.SectionType, opt => opt.Ignore()).PreserveReferences();
-            //CreateMap<SectionTypeDto, SectionType>();
+            CreateMap<Section, CourseDto>();
+            CreateMap<Section, SectionDto>().PreserveReferences();
+            CreateMap<Question, QuestionDto>().PreserveReferences();
+            CreateMap<Answer, AnswerDto>().PreserveReferences();
+            
+            CreateMap<SectionDto, Section>().ForMember(x => x.SectionType, opt => opt.Ignore()).ForMember(x=>x.Children, opt=>opt.Ignore()).ForMember(x=>x.Parent, opt=>opt.Ignore()).PreserveReferences();
+            CreateMap<QuestionDto, Question>().PreserveReferences();
+            CreateMap<AnswerDto, Answer>().PreserveReferences();
         }
     }
 }

@@ -32,6 +32,10 @@ body {
     text-transform: uppercase;
 }
 
+.logo {
+    background-color: #62487a;
+}
+
 /*Navbar*/
 .navbar-inverse {
     border-color: #4c4c4c;
@@ -51,10 +55,13 @@ body {
 }
 
 /*Sidebar*/
+.back-button {
+    display: none;
+}
 .nav-sidebar {
     position: relative;
     background-color: #1e1e1e;
-    font-size: 1.2em;
+    font-size: 1.1em;
     min-height: 600px !important;
     border: 4px double #878787;
     opacity: 0.8;
@@ -80,7 +87,7 @@ body {
 .nav-sidebar > .inner-sidebar > p {
     color: #27a52b;
 }
-.js-sidebar-text-animation {
+#js-sidebar-text-animation {
     min-height: 50px;
     color: #859900;
 } 
@@ -99,12 +106,66 @@ body {
 .inner-content {
     position: relative;
     padding-left: 10%;
-    min-height: 600px !important;
+    padding-right: 10%;
+    padding-top: 30px;
+    padding-bottom: 80px !important;
     border: 4px double #878787;
     border-radius: 8px;
     background-color: #333333;
     opacity: 0.8;
 }
+
+/*Admin panel*/
+#admin-tree-table {
+    margin-top: 20px;
+    background-color: antiquewhite;
+    color: #2b2b2b;
+}
+
+#admin-tree-table, #admin-tree-table td, #admin-tree-table th {
+    border-color: gray;
+}
+.admin-menu-header {
+    background-color: darkgray;
+}
+.question-button {
+    margin-bottom: 20px;
+}
+#add-question {
+    margin-bottom: 20px;
+}
+.js-delete-answer {
+    display: block;
+}
+.js-add-answer {
+    display: block;
+    margin-top: 15px;
+}
+#questions-container {
+    position: relative;
+    border: 4px double #878787;
+    border-radius: 8px;
+    background-color: #333333;
+    padding: 15px;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+#questions-container > p {
+    color: #859900;
+}
+.question-textarea {
+    min-width: 60%;
+}
+textarea.form-content{
+    min-width: 80%;
+}
+#sections-table {
+    background-color: lightgrey;
+    margin-top: 20px;
+    color: darkslategrey;
+    border-radius: 5px;
+}
+
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,

@@ -1,0 +1,91 @@
+@model SectionViewModel
+@{
+    ViewData["Title"] = "Codo School - Quiz Form";
+}
+<div class="admin-nav-panel">
+    <ol class="breadcrumb">
+        @foreach (var item in Model.Parents)
+        {
+            <li><a href='@Url.Action("Edit", "Sections", new { id = item.Id})'>@item.Name</a></li>
+        }
+    </ol>
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Edit", "Sections", new { id = Model.SectionDto.ParentId})'">Back</button>
+    <button class="btn btn-success" onclick="location.href='@Url.Action("Index", "Sections")'">Admin Panel</button>
+</div>
+<h2>Edit Quiz</h2>
+
+<div class="form-region">
+    <form asp-action="Save" method="post" asp-antiforgery="true">
+        <div class="form-group">
+            <label asp-for="SectionDto.Name"></label>
+            <input asp-for="SectionDto.Name" class="form-control">
+            <span asp-validation-for="SectionDto.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="SectionDto.Description"></label>
+            <textarea asp-for="SectionDto.Description" rows="5" class="form-control form-description"></textarea>
+        </div>
+        <div id="questions-container">
+            <p>//here you can add, edit or delete questions and answers</p>
+            <div class="block-header content-header">[Quiz Editor]</div>
+            @for(int i=0; i<Model.SectionDto.Questions.Count; i++)
+        {
+                <div id="@("question"+i)" class="form-group question-container">
+                    <button class='btn btn-danger question-button js-delete-question' type="button" data-question-id="@i" data-db-question-id="@Model.SectionDto.Questions[i].Id">Delete Question</button>
+                    <div class="form-group">
+                        <label class="question-label">Question</label>
+                        <textarea asp-for="SectionDto.Questions[i].QuestionText" class="form-control question-textarea" rows="3"></textarea>
+                        <span asp-validation-for="SectionDto.Questions[i].QuestionText" class="text-danger question-validation"></span>
+                    </div>
+                    
+                    <div id="@("answers-wrapper"+i)" class="answers-container">
+                        @for (int j = 0; j < Model.SectionDto.Questions[i].Answers.Count; j++)
+                {
+                            <div id="@("question-" + i + "-answer-" + j)" class='radio answer-container form-group'>
+                                <label>
+                                    @{
+                                if (Model.SectionDto.Questions[i].Answers[j].IsCorrect)
+                                {
+                                        <input asp-for="SectionDto.Questions[i].CorrectAnswerId" value="@j" type="radio" class="answer-radio" checked>
+                                }
+                                else
+                                {
+                                        <input asp-for="SectionDto.Questions[i].CorrectAnswerId" value="@j" type="radio" class="answer-radio">
+                                }
+                                    }
+
+                                    Answer
+                                </label>
+
+                                <textarea asp-for="SectionDto.Questions[i].Answers[j].AnswerText" class="form-control answer-textarea"></textarea>
+                                <span asp-validation-for="SectionDto.Questions[i].Answers[j].AnswerText" class="text-danger answer-validation"></span>
+                                <button class='btn btn-link js-delete-answer' type='button' data-answer-id="@j" data-question-id="@i" data-db-answer-id="@Model.SectionDto.Questions[i].Answers[j].Id">Delete Answer</button>
+                            </div>
+                }
+                    </div>
+                    <span asp-validation-for="SectionDto.Questions[i].CorrectAnswerId" class="text-danger answer-validation"></span>
+                    <button class='btn btn-primary js-add-answer' type="button" data-question-id = "@(Model.SectionDto.Questions.Count - 1)">Add Answer</button>
+                </div>
+        }
+            <button id="add-question" class='btn btn-primary js-add-question' type="button">Add Question</button>
+        </div>
+        
+
+        <input type="hidden" asp-for="SectionDto.Id">
+        <input type="hidden" asp-for="SectionDto.ParentId">
+        <input type="hidden" asp-for="SectionDto.SectionTypeId">
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+@section Scripts{
+<script src="~/js/quiz.js"></script>
+<script>
+    $(document).ready(function () {
+        QuizController.initialize(@Model.SectionDto.Questions.Count);
+        });
+</script>
+}
+    
+

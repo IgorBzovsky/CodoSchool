@@ -15,10 +15,13 @@ namespace CodoSchool.Data
             _context = context;
             Sections = new EFSectionsRepository(_context);
             SectionTypes = new EFSectionTypesRepository(_context);
+            Questions = new EFQuestionsRepository(_context);
+            Answers = new EFAnswersRepository(_context);
         }
         public ISectionsRepository Sections { get; private set; }
-
         public ISectionTypesRepository SectionTypes { get; private set; }
+        public IQuestionsRepository Questions { get; private set; }
+        public IAnswersRepository Answers { get; private set; }
 
         public int Complete()
         {

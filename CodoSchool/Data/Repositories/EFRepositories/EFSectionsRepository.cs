@@ -24,6 +24,11 @@ namespace CodoSchool.Data.Repositories.EFRepositories
             return rootSections.FlattenHierarchy();
         }
 
+        public Section GetSectionIncluded(int id)
+        {
+            return Context.Set<Section>().Include(x => x.Children).Include(x => x.SectionType).Include(x => x.Parent).Include(x => x.Questions).ThenInclude(x => x.Answers).SingleOrDefault(x => x.Id == id);
+        }
+
         //Implementation must be improved (issue with ordering hierarchies)
         public IEnumerable<Section> GetCategoriesAndCourses()
         {
@@ -37,6 +42,22 @@ namespace CodoSchool.Data.Repositories.EFRepositories
             if (section == null || section.SectionTypeId != SectionType.Course)
                 return null;
             return Context.Set<Section>().Include(x=>x.SectionType).ToList().Where(x => x.ParentId == section.Id);
+        }
+
+        public IEnumerable<Section> GetParents(Section section)
+        {
+            if (section != null)
+            {
+                Section parent = section.ParentId == null ? null : Get((int)section.ParentId);
+                if (parent != null)
+                {
+                    foreach (var item in GetParents(parent))
+                    {
+                        yield return item;
+                    }
+                    yield return parent;
+                }
+            }
         }
     }
 }

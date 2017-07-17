@@ -61,5 +61,15 @@ namespace CodoSchool.Controllers
                 return NotFound();
             return PartialView("_VideoLessonPartial", videoLesson);
         }
+
+        public IActionResult Course(int id)
+        {
+            CourseDto course = _lessonsService.ProvideCourse(id);
+            if (course == null)
+                return NotFound();
+            return PartialView("_CoursePartial", course);
+        }
+
+        public IActionResult Welcome() => PartialView("_Welcome");
     }
 }

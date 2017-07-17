@@ -29,5 +29,10 @@ namespace CodoSchool.Services
             Section videoLesson = _context.Sections.Find(x => x.Id == videoLessonId && x.SectionTypeId == SectionType.VideoLesson).FirstOrDefault();
             return _mapper.Map<Section, VideoLessonDto>(videoLesson);
         }
+        public CourseDto ProvideCourse(int courseId)
+        {
+            Section course = _context.Sections.Find(x => x.Id == courseId && x.SectionTypeId == SectionType.Course).FirstOrDefault();
+            return _mapper.Map<Section, CourseDto>(course);
+        }
     }
 }

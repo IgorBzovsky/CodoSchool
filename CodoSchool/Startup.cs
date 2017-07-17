@@ -92,6 +92,9 @@ namespace CodoSchool
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "admin",
+                    template: "{Admin}/{controller=Sections}/{action=Index}/{id?}");
             });
         }
     }

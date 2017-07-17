@@ -8,12 +8,28 @@ var MenuController = function () {
         menuPlaceholderId = menuId;
         contentPlaceholderId = contentId;
         initializeSectionsMenu();
+        initializeBackButton();
     };
-
     //Initializes tree menu and menu item's selection behaviour
     var initializeSectionsMenu = function () {
         getTreeMenu();
         initializeSelection();
+    };
+
+    var initializeBackButton = function () {
+        $(".back-button").click(function () {
+            var button = $(this);
+            $.ajax({
+                url: '/api/Menu/',
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    $(menuPlaceholderId).tree('loadData', data);
+                    loadWelcomePage();
+                    button.hide();
+                }
+            });
+        });
     };
 
     //Getting data for menu items from api controller
@@ -43,7 +59,7 @@ var MenuController = function () {
                     break;
                 case "TextLesson":
                 case "VideoLesson":
-                    goToLesson(event.node);
+                    loadContent(event.node);
                     break;
             }
         });
@@ -59,10 +75,11 @@ var MenuController = function () {
                 $(menuPlaceholderId).tree('loadData', data);
             }
         });
+        loadContent(node);
+        $(".back-button").css({ display: "block" });
     }
 
-    //Loading content of the lesson to the content placeholder
-    var goToLesson = function(node) {
+    var loadContent = function (node) {
         $.ajax({
             url: '/Home/' + node.sectionType.name + '/' + node.id,
             dataType: "html",
@@ -77,6 +94,20 @@ var MenuController = function () {
         });
     }
 
+    var loadWelcomePage = function () {
+        $.ajax({
+            url: '/Home/Welcome/',
+            dataType: "html",
+            type: 'GET',
+            success: function (data) {
+                $(contentPlaceholderId).html(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+    }
     return {
         initialize: initialize
     }

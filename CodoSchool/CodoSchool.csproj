@@ -17,7 +17,9 @@
     <Content Include="wwwroot\fonts\whitrabt.otf" />
     <Content Include="wwwroot\fonts\whitrabt.ttf" />
     <Content Include="wwwroot\fonts\whitrabt.woff" />
+    <Content Include="wwwroot\js\admin.js" />
     <Content Include="wwwroot\js\animation.js" />
+    <Content Include="wwwroot\js\quiz.js" />
     <Content Include="wwwroot\js\sidebar-menu.js" />
   </ItemGroup>
   <ItemGroup>

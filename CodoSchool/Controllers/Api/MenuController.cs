@@ -15,9 +15,11 @@ namespace CodoSchool.Controllers.Api
     public class MenuController : Controller
     {
         private readonly MenuService _menuService;
-        public MenuController(MenuService menuService)
+        private readonly AdminService _adminService;
+        public MenuController(MenuService menuService, AdminService adminService)
         {
             _menuService = menuService;
+            _adminService = adminService;
         }
         // GET: api/Menu
         [HttpGet]
@@ -43,6 +45,7 @@ namespace CodoSchool.Controllers.Api
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _adminService.DeleteSection(id);
         }
     }
 }
