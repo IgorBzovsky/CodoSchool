@@ -43,7 +43,13 @@ namespace CodoSchool.Controllers
 
         public IActionResult Quiz(int id)
         {
-            return null;
+            Random rn = new Random();
+            var t = new Question
+            {
+                Id = rn.Next()
+            };
+
+            return PartialView("_QuizPartial", t);
         }
 
         public IActionResult TextLesson(int id)

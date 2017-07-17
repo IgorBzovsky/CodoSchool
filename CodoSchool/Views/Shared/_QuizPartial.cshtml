@@ -1,5 +1,24 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Question
+
 @{
+
 }
+
+<form asp-area="" asp-controller="Home" asp-action="Quiz" method="post" target="_parent">
+
+    <div id="AAA">
+
+    </div>
+
+    @if (Model != null)
+    {
+        <h1>@Model.Id</h1>
+        <input type="hidden" name="ttt" value="@Model.Id" />
+
+    }
+     
+    <h1>Hello</h1>
+    
+    
+    <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+</form>
