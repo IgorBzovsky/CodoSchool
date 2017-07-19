@@ -103,6 +103,36 @@ var MenuController = function () {
         initialize: initialize
     }
 }();
+var QuizController = function () {
+    function formSubmitHandler() {
+        
+        $("#quizForm").on("submit", function (e) {
+            var regExp = /^question=([-]*\d+)&answer=(\d).*$/;
+            var form = $("#quizForm").serialize();
+            //console.log(form);
+            var resArr = regExp.exec(form);
+            var currentQuestion = resArr[1];
+            var selectedIndex = resArr[2];
+            var param = "?question=" + currentQuestion + "&answer= " + selectedIndex;
+
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr("action") + param,
+                    data: $(this).serialize(),
+                    type: $(this).attr("method")
+                })
+                    .done(function (result) {
+                        
+                        $("#content-block").html(result);
+                    })
+            });
+        
+    };
+
+    return {
+        submitHandler: formSubmitHandler
+    }
+}();
 
 
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CodoSchool.Services;
 using CodoSchool.Data.Abstractions;
+using CodoSchool.Data;
 using CodoSchool.Models;
 using CodoSchool.Models.DTOs;
 
@@ -13,7 +14,9 @@ namespace CodoSchool.Controllers
     public class HomeController : Controller
     {
         LessonsService _lessonsService;
-        public HomeController(LessonsService lessonsService)
+
+        public HomeController(
+               LessonsService lessonsService)
         {
             _lessonsService = lessonsService;
         }
@@ -41,7 +44,7 @@ namespace CodoSchool.Controllers
             return View();
         }
 
-        public IActionResult Quiz(int id)
+        public PartialViewResult Quiz(int id)
         {
             Random rn = new Random();
             var t = new Question
@@ -49,8 +52,14 @@ namespace CodoSchool.Controllers
                 Id = rn.Next()
             };
 
+            int answerID, questionIndex, questionsCount;
+            int.TryParse(Request.Query["answer"], out answerID);
+            int.TryParse(Request.Query["question"], out questionIndex);
+            ViewBag.answerid =  answerID;
+            ViewBag.questionIndex = questionIndex >= 0 ? questionIndex : 0;
             return PartialView("_QuizPartial", t);
         }
+
 
         public IActionResult TextLesson(int id)
         {
@@ -66,6 +75,28 @@ namespace CodoSchool.Controllers
             if (videoLesson == null)
                 return NotFound();
             return PartialView("_VideoLessonPartial", videoLesson);
+        }
+
+        public Section GetQuiz(int? id = null)
+        {
+            if (id == null) return null;
+
+            Section quiz = _context.Sections.Include(x => x.SectionType).Include(x => x.Parent).SingleOrDefault(x => x.Id == id);
+
+            if (quiz == null || quiz.SectionType.ParentId != SectionType.Theme)
+                NotFound();
+
+
+            var questions =
+                _context.Question.
+                Where(x => x.SectionId == id).
+                Include(x => x.Answers);
+
+            foreach (var question in questions)
+            {
+                quizDto.Questions.Add(question);
+            }
+            return quizDto;
         }
     }
 }

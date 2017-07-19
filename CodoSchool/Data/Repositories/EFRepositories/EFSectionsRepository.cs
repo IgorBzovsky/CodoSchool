@@ -38,5 +38,7 @@ namespace CodoSchool.Data.Repositories.EFRepositories
                 return null;
             return Context.Set<Section>().Include(x=>x.SectionType).ToList().Where(x => x.ParentId == section.Id);
         }
+
+
     }
 }

@@ -2,23 +2,47 @@
 
 @{
 
+    int currQuestion = ViewBag.questionIndex;
+    
 }
 
-<form asp-area="" asp-controller="Home" asp-action="Quiz" method="post" target="_parent">
+<form asp-area="" asp-controller="Home" asp-action="Quiz" method="post" id="quizForm">
 
-    <div id="AAA">
+        <h2>index: @ViewBag.questionIndex</h2>
+    <input type="hidden" name="question" value="@currQuestion" />HH<br />
 
-    </div>
+        <input type="radio" name="answer" value="0" checked="checked"/>Bla
+        <input type="radio" name="answer" value="1" />Bla1
+        <input type="radio" name="answer" value="2" />Bla2
+
+        <input type="radio" name="answer" value="3" />Bla3
+    <h1>Answer id is : @ViewBag.answerid</h1>
+
+
+    
 
     @if (Model != null)
     {
         <h1>@Model.Id</h1>
-        <input type="hidden" name="ttt" value="@Model.Id" />
 
     }
      
     <h1>Hello</h1>
-    
-    
-    <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+    @*<h1>@currQuestion</h1>*@
+    <button type="submit" class="btn btn-link navbar-btn navbar-link" onclick="questionChange(-1)">Previous</button>
+    <button type="submit" class="btn btn-link navbar-btn navbar-link" onclick="questionChange(1)">Next</button>
+   
+
 </form>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        QuizController.submitHandler();
+    });
+
+    function questionChange(step) {
+        $('[name=question]').val(@currQuestion+step);
+    }
+
+</script>
