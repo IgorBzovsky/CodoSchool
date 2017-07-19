@@ -42,10 +42,10 @@ body {
 /*Navbar*/
 .navbar-inverse {
     border-color: #4c4c4c;
-    font-size: 1.3em !important;
+    font-size: 1.3em;
 }
 .navbar-brand {
-    font-size: 1.7em !important;
+    font-size: 1.7em;
 }
 .brand-toggle-class {
     color: white;
@@ -65,14 +65,14 @@ body {
     position: relative;
     background-color: #1e1e1e;
     font-size: 1.1em;
-    min-height: 600px !important;
+    min-height: 600px;
     border: 4px double #878787;
     opacity: 0.8;
     border-radius: 8px;
 }
 .menu-header {
     background-color: #1e1e1e;
-    font-size: 0.9em !important;
+    font-size: 0.9em;
 }
 .inner-sidebar{
     margin-top: 30px;
@@ -84,7 +84,7 @@ body {
     color: #9d9d9d !important;
 }
 .nav-sidebar .jqtree-title-folder {
-    text-transform: uppercase !important;
+    text-transform: uppercase;
     color: #a25cf2 !important;
 }
 .nav-sidebar > .inner-sidebar > p {
@@ -100,18 +100,14 @@ body {
 
 /*Content*/
 .main-content {
-    background-color: #62487a !important;
+    background-color: #62487a;
 }
 .content-header {
     background-color: #333333;
-    font-size: 1em !important;
 }
 .inner-content {
     position: relative;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-top: 30px;
-    padding-bottom: 80px !important;
+    padding: 30px 10%;
     border: 4px double #878787;
     border-radius: 8px;
     background-color: #333333;
@@ -159,7 +155,7 @@ body {
 .question-textarea {
     min-width: 60%;
 }
-textarea.form-content{
+.form-content{
     min-width: 80%;
 }
 #sections-table {

@@ -48,7 +48,7 @@ var MenuController = function () {
                 });
             }
         });
-    }
+    };
     
     //Manage selection behaviour for menu items
     var initializeSelection = function () {
@@ -63,21 +63,21 @@ var MenuController = function () {
                     break;
             }
         });
-    }
+    };
 
     //Change categories menu for course menu
-    var goToCourse = function(node) {
+    var goToCourse = function (node) {
         $.ajax({
             url: '/api/Menu/' + node.id,
             dataType: 'json',
             type: 'GET',
             success: function (data) {
                 $(menuPlaceholderId).tree('loadData', data);
+                loadContent(node);
+                $(".back-button").css({ display: "block" });
             }
         });
-        loadContent(node);
-        $(".back-button").css({ display: "block" });
-    }
+    };
 
     var loadContent = function (node) {
         $.ajax({
@@ -92,7 +92,7 @@ var MenuController = function () {
                 alert(thrownError);
             }
         });
-    }
+    };
 
     var loadWelcomePage = function () {
         $.ajax({
@@ -107,10 +107,10 @@ var MenuController = function () {
                 alert(thrownError);
             }
         });
-    }
+    };
     return {
         initialize: initialize
-    }
+    };
 }();
 
 

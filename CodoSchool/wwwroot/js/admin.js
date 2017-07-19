@@ -1,5 +1,5 @@
 ﻿var AdminController = new function () {
-    var createMenu = function(menuId){
+    var createMenu = function (menuId) {
         $(menuId).treegrid();
         $(menuId).on("click", ".js-delete", function () {
             var button = $(this);
@@ -11,13 +11,13 @@
                     $('.treegrid-' + button.attr("data-section-id")).treegrid('remove');
                 },
                 error: function () {
-                    alert("Error occured while attempting to delete section.")
+                    alert("Error occured while attempting to delete section.");
                     button.attr('disabled', 'enabled');
                 }
             });
         });
-    }
+    };
     return {
         createMenu: createMenu
-    }
+    };
 }();

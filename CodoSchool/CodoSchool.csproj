@@ -21,7 +21,6 @@
     <Content Include="wwwroot\js\admin.js" />
     <Content Include="wwwroot\js\animation.js" />
     <Content Include="wwwroot\js\quiz.js" />
-    <Content Include="wwwroot\js\sidebar-menu.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.1.1" />
