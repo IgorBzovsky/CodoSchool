@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CodoSchool.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CodoSchool.Models;
 
 namespace CodoSchool.Data
 {
@@ -48,11 +44,13 @@ namespace CodoSchool.Data
 
             builder.Entity<ApplicationUser>()
                 .Property(x => x.FirstName)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
 
             builder.Entity<ApplicationUser>()
                 .Property(x => x.LastName)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
 
             builder.Entity<Question>()
                 .Property(x => x.QuestionText)
