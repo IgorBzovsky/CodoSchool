@@ -41,8 +41,9 @@ body {
 
 /*Navbar*/
 .navbar-inverse {
-    border-color: #4c4c4c;
+    border-color: #281d33;
     font-size: 1.3em;
+    background-color: #281d33;
 }
 .navbar-brand {
     font-size: 1.7em;
@@ -55,6 +56,14 @@ body {
 }
 .navbar-brand > .school {
     color: #5276af;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #62487a;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #d2d2d2;
 }
 
 /*Sidebar*/

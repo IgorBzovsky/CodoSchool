@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CodoSchool.Data;
+using CodoSchool.Data.Abstractions;
+using CodoSchool.Models;
+using CodoSchool.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CodoSchool.Data;
-using CodoSchool.Models;
-using CodoSchool.Services;
-using CodoSchool.Data.Abstractions;
 
 namespace CodoSchool
 {

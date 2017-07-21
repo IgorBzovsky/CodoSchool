@@ -37,6 +37,30 @@ namespace CodoSchool.Data
                 .WithMany(sec => sec.StudentProgress)
                 .HasForeignKey(s => s.SectionId)
                 .HasPrincipalKey(sec => sec.Id);
+
+            builder.Entity<Section>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            builder.Entity<SectionType>()
+                .Property(x => x.Name)
+                .IsRequired();
+
+            builder.Entity<ApplicationUser>()
+                .Property(x => x.FirstName)
+                .IsRequired();
+
+            builder.Entity<ApplicationUser>()
+                .Property(x => x.LastName)
+                .IsRequired();
+
+            builder.Entity<Question>()
+                .Property(x => x.QuestionText)
+                .IsRequired();
+
+            builder.Entity<Answer>()
+                .Property(x => x.AnswerText)
+                .IsRequired();
         }
     }
 }
