@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using CodoSchool.Models;
+using CodoSchool.Models.AccountViewModels;
+using CodoSchool.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using CodoSchool.Models;
-using CodoSchool.Models.AccountViewModels;
-using CodoSchool.Services;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace CodoSchool.Controllers
 {
@@ -112,7 +110,7 @@ namespace CodoSchool.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName, UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

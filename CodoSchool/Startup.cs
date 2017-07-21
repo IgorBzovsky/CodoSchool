@@ -93,6 +93,8 @@ namespace CodoSchool
                     name: "admin",
                     template: "{Admin}/{controller=Sections}/{action=Index}/{id?}");
             });
+
+            RolesData.SeedRoles(app.ApplicationServices).Wait();
         }
     }
 }

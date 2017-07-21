@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CodoSchool.Data;
+using CodoSchool.Models;
+using CodoSchool.Models.ManageViewModels;
+using CodoSchool.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using CodoSchool.Models;
-using CodoSchool.Models.ManageViewModels;
-using CodoSchool.Services;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CodoSchool.Controllers
 {
@@ -22,6 +21,7 @@ namespace CodoSchool.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly ApplicationDbContext _context;
 
         public ManageController(
           UserManager<ApplicationUser> userManager,
@@ -29,7 +29,7 @@ namespace CodoSchool.Controllers
           IOptions<IdentityCookieOptions> identityCookieOptions,
           IEmailSender emailSender,
           ISmsSender smsSender,
-          ILoggerFactory loggerFactory)
+          ILoggerFactory loggerFactory, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -37,6 +37,7 @@ namespace CodoSchool.Controllers
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
+            _context = context;
         }
 
         //
@@ -64,9 +65,40 @@ namespace CodoSchool.Controllers
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
                 Logins = await _userManager.GetLoginsAsync(user),
-                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
+                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user),
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
             return View(model);
+        }
+
+        //
+        // POST: /Manage/RemovePhoneNumber
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(IndexViewModel viewModel)
+        {
+            var user = await GetCurrentUserAsync();
+            if (!ModelState.IsValid)
+            {
+                if (user == null)
+                {
+                    return View("Error");
+                }
+                viewModel.HasPassword = await _userManager.HasPasswordAsync(user);
+                viewModel.PhoneNumber = await _userManager.GetPhoneNumberAsync(user);
+                viewModel.TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user);
+                viewModel.Logins = await _userManager.GetLoginsAsync(user);
+                viewModel.BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user);
+                viewModel.FirstName = user.FirstName;
+                viewModel.LastName = user.LastName;
+                return View(nameof(Index), viewModel);
+            }
+
+            user.FirstName = viewModel.FirstName;
+            user.LastName = viewModel.LastName;
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
         }
 
         //

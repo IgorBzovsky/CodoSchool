@@ -1,8 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace CodoSchool.Models.ManageViewModels
 {
@@ -17,5 +15,15 @@ namespace CodoSchool.Models.ManageViewModels
         public bool TwoFactor { get; set; }
 
         public bool BrowserRemembered { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
     }
 }
