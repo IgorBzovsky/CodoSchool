@@ -77,26 +77,26 @@ namespace CodoSchool.Controllers
             return PartialView("_VideoLessonPartial", videoLesson);
         }
 
-        public Section GetQuiz(int? id = null)
-        {
-            if (id == null) return null;
+        //public Section GetQuiz(int? id = null)
+        //{
+        //    if (id == null) return null;
 
-            Section quiz = _context.Sections.Include(x => x.SectionType).Include(x => x.Parent).SingleOrDefault(x => x.Id == id);
+        //    Section quiz = _context.Sections.Include(x => x.SectionType).Include(x => x.Parent).SingleOrDefault(x => x.Id == id);
 
-            if (quiz == null || quiz.SectionType.ParentId != SectionType.Theme)
-                NotFound();
+        //    if (quiz == null || quiz.SectionType.ParentId != SectionType.Theme)
+        //        NotFound();
 
 
-            var questions =
-                _context.Question.
-                Where(x => x.SectionId == id).
-                Include(x => x.Answers);
+        //    var questions =
+        //        _context.Question.
+        //        Where(x => x.SectionId == id).
+        //        Include(x => x.Answers);
 
-            foreach (var question in questions)
-            {
-                quizDto.Questions.Add(question);
-            }
-            return quizDto;
-        }
+        //    foreach (var question in questions)
+        //    {
+        //        quizDto.Questions.Add(question);
+        //    }
+        //    return quizDto;
+        //}
     }
 }
