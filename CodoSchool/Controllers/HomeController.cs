@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using CodoSchool.Models.DTOs;
 using CodoSchool.Services;
-using CodoSchool.Data.Abstractions;
-using CodoSchool.Models;
-using CodoSchool.Models.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CodoSchool.Controllers
 {
@@ -16,6 +10,7 @@ namespace CodoSchool.Controllers
         public HomeController(LessonsService lessonsService)
         {
             _lessonsService = lessonsService;
+
         }
         public IActionResult Index()
         {

@@ -1,9 +1,5 @@
 ﻿using CodoSchool.Data.Abstractions;
 using CodoSchool.Data.Repositories.EFRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CodoSchool.Data
 {
@@ -17,11 +13,13 @@ namespace CodoSchool.Data
             SectionTypes = new EFSectionTypesRepository(_context);
             Questions = new EFQuestionsRepository(_context);
             Answers = new EFAnswersRepository(_context);
+            StudentProgress = new EFStudentProgressRepository(_context);
         }
         public ISectionsRepository Sections { get; private set; }
         public ISectionTypesRepository SectionTypes { get; private set; }
         public IQuestionsRepository Questions { get; private set; }
         public IAnswersRepository Answers { get; private set; }
+        public IStudentProgressRepository StudentProgress { get; private set; }
 
         public int Complete()
         {

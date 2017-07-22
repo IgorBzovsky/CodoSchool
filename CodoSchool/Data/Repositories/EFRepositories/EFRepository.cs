@@ -1,14 +1,12 @@
 ﻿using CodoSchool.Data.Abstractions;
-using CodoSchool.EntityBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace CodoSchool.Data.Repositories.EFRepositories
 {
-    public class EFRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
+    public class EFRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly ApplicationDbContext Context;
         public EFRepository(ApplicationDbContext context)

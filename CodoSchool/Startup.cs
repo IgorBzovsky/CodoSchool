@@ -59,6 +59,7 @@ namespace CodoSchool
             services.AddTransient<MenuService>();
             services.AddTransient<LessonsService>();
             services.AddTransient<AdminService>();
+            services.AddTransient<StatisticService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

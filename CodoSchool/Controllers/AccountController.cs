@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace CodoSchool.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly StatisticService _statisticsService;
         private readonly string _externalCookieScheme;
 
         public AccountController(
@@ -29,7 +31,8 @@ namespace CodoSchool.Controllers
             IOptions<IdentityCookieOptions> identityCookieOptions,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            StatisticService statisticsService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -37,6 +40,17 @@ namespace CodoSchool.Controllers
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _statisticsService = statisticsService;
+        }
+
+        //
+        // GET: /Account/Statistics
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Statistics()
+        {
+            IEnumerable<CourseProgressViewModel> viewModel = _statisticsService.GetStudentProgress(_userManager.GetUserId(User));
+            return View(viewModel);
         }
 
         //

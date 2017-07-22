@@ -22,18 +22,6 @@ namespace CodoSchool.Data
             builder.Entity<StudentProgress>()
                 .HasKey(t => new { t.ApplicationUserId, t.SectionId });
 
-            builder.Entity<StudentProgress>()
-                .HasOne(s => s.ApplicationUser)
-                .WithMany(a => a.StudentProgress)
-                .HasForeignKey(s => s.ApplicationUserId)
-                .HasPrincipalKey(a => a.Id);
-
-            builder.Entity<StudentProgress>()
-                .HasOne(s => s.Section)
-                .WithMany(sec => sec.StudentProgress)
-                .HasForeignKey(s => s.SectionId)
-                .HasPrincipalKey(sec => sec.Id);
-
             builder.Entity<Section>()
                 .Property(x => x.Name)
                 .IsRequired();

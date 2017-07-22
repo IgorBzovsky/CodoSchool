@@ -11,6 +11,7 @@ namespace CodoSchool.Data.Abstractions
         ISectionTypesRepository SectionTypes { get; }
         IQuestionsRepository Questions { get; }
         IAnswersRepository Answers { get; }
+        IStudentProgressRepository StudentProgress { get; }
         int Complete();
     }
 }
