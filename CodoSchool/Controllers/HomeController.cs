@@ -40,7 +40,7 @@ namespace CodoSchool.Controllers
         {
             return "test";
         }
-
+        
         public IActionResult TextLesson(int id)
         {
             TextLessonDto textLesson = _lessonsService.ProvideTextLesson(id);

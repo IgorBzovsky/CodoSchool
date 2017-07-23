@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using CodoSchool.Services;
-using CodoSchool.Models.DTOs;
 using CodoSchool.Models;
+using CodoSchool.Models.DTOs;
+using CodoSchool.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace CodoSchool.Controllers.Admin
 {
+    [Authorize(Roles = "Admin")]
     public class SectionsController : Controller
     {
         AdminService _adminService;
