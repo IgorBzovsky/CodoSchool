@@ -131,10 +131,10 @@ var MenuController = function () {
             }
         });
     };
-    return {
-        initialize: initialize
-    };
-}();
+//    return {
+//        initialize: initialize
+//    };
+//}();
 var QuizController = function () {
     function formSubmitHandler() {
         
