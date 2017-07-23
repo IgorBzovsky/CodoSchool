@@ -248,9 +248,7 @@ test("getData", function (assert) {
     assert.deepEqual(n1.getData(true), [
         {
             name: "n1",
-            children: [
-                { name: "c1" }
-            ]
+            children: [{ name: "c1" }]
         }
     ]);
 });
@@ -337,9 +335,7 @@ test("append", function (assert) {
     // 2. Append subtree
     node1.append({
         name: "child4",
-        children: [
-            { name: "child5" }
-        ]
+        children: [{ name: "child5" }]
     });
     assert.equal(utils_for_test_1.formatNodes(node1.children), "child1 child2 child3 child4");
     var child4 = utils_for_test_1.doGetNodeByName(node1, "child4");
@@ -356,9 +352,7 @@ test("prepend", function (assert) {
     // 2. Prepend subtree
     node1.prepend({
         name: "child3",
-        children: [
-            { name: "child4" }
-        ]
+        children: [{ name: "child4" }]
     });
     assert.equal(utils_for_test_1.formatNodes(node1.children), "child3 child0 child1 child2");
     var child3 = utils_for_test_1.doGetNodeByName(node1, "child3");

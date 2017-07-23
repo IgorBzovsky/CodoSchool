@@ -181,29 +181,32 @@ test("loadData", function (assert) {
     var data = [
         { label: "c4", id: 200 },
         {
-            label: "c5", id: 201,
-            children: [
-                { label: "c6", id: 202 }
-            ]
+            label: "c5",
+            id: 201,
+            children: [{ label: "c6", id: 202 }]
         }
     ];
     $tree.tree("loadData", data, child3);
     // first node in html is still 'node1'
-    assert.equal($tree.find("li:eq(0)").find(".jqtree-element:eq(0) span.jqtree-title").text(), "node1");
+    assert.equal($tree
+        .find("li:eq(0)")
+        .find(".jqtree-element:eq(0) span.jqtree-title")
+        .text(), "node1");
     // Node 'child3' now has a children 'c4' and 'c5'
     var $child3 = $tree.find("span:contains(child3)");
     var $li = $child3.closest("li");
-    assert.equal($li.children("ul").children("li:eq(0)").find(".jqtree-element span.jqtree-title").text(), "c4");
+    assert.equal($li
+        .children("ul")
+        .children("li:eq(0)")
+        .find(".jqtree-element span.jqtree-title")
+        .text(), "c4");
     // Node 'child3' must have toggler button
     assert.ok($child3.prev().is("a.jqtree-toggler"), "node 'child3' must have toggler button");
     // - select node 'c5' and load new data under 'child3'
     var c5 = $tree.tree("getNodeByName", "c5");
     $tree.tree("selectNode", c5);
     assert.equal($tree.tree("getSelectedNode").name, "c5");
-    var data2 = [
-        { label: "c7" },
-        { label: "c8" }
-    ];
+    var data2 = [{ label: "c7" }, { label: "c8" }];
     $tree.tree("loadData", data2, child3);
     // c5 must be deselected
     assert.equal($tree.tree("getSelectedNode"), false);
@@ -346,7 +349,9 @@ test("click toggler", function (assert) {
         data: utils_for_test_1.example_data,
         selectable: true
     });
-    var $title = $tree.find("li:eq(0)").find("> .jqtree-element > span.jqtree-title");
+    var $title = $tree
+        .find("li:eq(0)")
+        .find("> .jqtree-element > span.jqtree-title");
     assert.equal($title.text(), "node1");
     var $toggler = $title.prev();
     assert.ok($toggler.is("a.jqtree-toggler.jqtree-closed"));
@@ -388,9 +393,7 @@ test("getNodeById", function (assert) {
         {
             label: "sub1",
             id: 200,
-            children: [
-                { label: "sub2", id: 201 }
-            ]
+            children: [{ label: "sub2", id: 201 }]
         }
     ];
     $tree.tree("loadData", subtree_data, node2);
@@ -408,7 +411,10 @@ test("autoOpen", function (assert) {
         function () {
             var $li = $(this);
             if ($li.is(".jqtree-folder") && !$li.is(".jqtree-closed")) {
-                var label = $li.children(".jqtree-element").find("span").text();
+                var label = $li
+                    .children(".jqtree-element")
+                    .find("span")
+                    .text();
                 open_nodes.push(label);
             }
         });
@@ -432,9 +438,7 @@ test("autoOpen", function (assert) {
                     children: [
                         {
                             label: "l3n1",
-                            children: [
-                                "l4n1"
-                            ]
+                            children: ["l4n1"]
                         }
                     ]
                 }
@@ -653,9 +657,7 @@ test("updateNode", function (assert) {
     $tree.tree("updateNode", child1, {
         id: child1.id,
         name: "child1",
-        children: [
-            { id: 5, name: "child1-1" }
-        ]
+        children: [{ id: 5, name: "child1-1" }]
     });
     assert.equal(utils_for_test_1.formatTitles($tree), "node1 child1 child1-1 child2 xyz child3");
     // remove children
@@ -768,7 +770,10 @@ test("mouse events", function (assert) {
     $node1.trigger($.Event("mousedown", { which: 1 }));
     // 2: trigger mouse move to child3
     var child3_offset = $child3.offset();
-    $tree.trigger($.Event("mousemove", { pageX: child3_offset.left, pageY: child3_offset.top }));
+    $tree.trigger($.Event("mousemove", {
+        pageX: child3_offset.left,
+        pageY: child3_offset.top
+    }));
     $tree.trigger("mouseup");
     assert.equal(utils_for_test_1.formatTitles($tree), "node2 child3 node1 child1 child2");
 });
@@ -847,9 +852,7 @@ test("getNodesByProperty", function (assert) {
             label: "sub1",
             id: 200,
             int_property: 222,
-            children: [
-                { label: "sub2", id: 201, int_property: 444 }
-            ]
+            children: [{ label: "sub2", id: 201, int_property: 444 }]
         }
     ];
     $tree.tree("loadData", subtree_data, node2);

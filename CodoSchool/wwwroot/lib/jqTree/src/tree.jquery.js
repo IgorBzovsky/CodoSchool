@@ -367,7 +367,7 @@ var JqTreeWidget = (function (_super) {
         this.mouse_delay = 300;
         this.is_initialized = false;
         this.options.rtl = this._getRtlOption();
-        if (!this.options.closedIcon) {
+        if (this.options.closedIcon === null) {
             this.options.closedIcon = this._getDefaultClosedIcon();
         }
         this.renderer = new elements_renderer_1["default"](this);
@@ -559,7 +559,7 @@ var JqTreeWidget = (function (_super) {
                 }
                 else {
                     node.is_open = true;
-                    return (level !== max_level);
+                    return level !== max_level;
                 }
             });
             return must_load_on_demand;
@@ -610,7 +610,7 @@ var JqTreeWidget = (function (_super) {
                     }
                     else {
                         _this._openNode(node, false, null);
-                        return (level !== max_level);
+                        return level !== max_level;
                     }
                 });
                 if (loading_count === 0) {
@@ -768,7 +768,8 @@ var JqTreeWidget = (function (_super) {
         }
         var canSelect = function () {
             if (_this.options.onCanSelectNode) {
-                return _this.options.selectable && _this.options.onCanSelectNode(node);
+                return (_this.options.selectable &&
+                    _this.options.onCanSelectNode(node));
             }
             else {
                 return _this.options.selectable;
@@ -879,10 +880,14 @@ var JqTreeWidget = (function (_super) {
                 on_finished();
             }
         };
-        var getDataFromResponse = function (response) { return ($.isArray(response) || typeof response === "object"
-            ? response
-            : response != null ? $.parseJSON(response) : []); };
-        var filterData = function (data) { return (_this.options.dataFilter ? _this.options.dataFilter(data) : data); };
+        var getDataFromResponse = function (response) {
+            return $.isArray(response) || typeof response === "object"
+                ? response
+                : response != null ? $.parseJSON(response) : [];
+        };
+        var filterData = function (data) {
+            return _this.options.dataFilter ? _this.options.dataFilter(data) : data;
+        };
         var handleSuccess = function (response) {
             var data = filterData(getDataFromResponse(response));
             handeLoadData(data);
@@ -896,7 +901,9 @@ var JqTreeWidget = (function (_super) {
         var loadDataFromUrlInfo = function () {
             var _url_info = parseUrlInfo();
             $.ajax($.extend({}, _url_info, {
-                method: url_info.method != null ? url_info.method.toUpperCase() : "GET",
+                method: url_info.method != null
+                    ? url_info.method.toUpperCase()
+                    : "GET",
                 cache: false,
                 dataType: "json",
                 success: handleSuccess,
@@ -964,6 +971,7 @@ JqTreeWidget.defaults = {
     onDragMove: null,
     onDragStop: null,
     buttonLeft: true,
-    onLoading: null
+    onLoading: null,
+    tabIndex: 0
 };
 simple_widget_1["default"].register(JqTreeWidget, "tree");

@@ -16,9 +16,7 @@ exports.example_data = [
         id: 124,
         int_property: 3,
         str_property: "3",
-        children: [
-            { label: "child3", id: 127 }
-        ]
+        children: [{ label: "child3", id: 127 }]
     }
 ];
 /*
@@ -31,10 +29,7 @@ example data 2:
 exports.example_data2 = [
     {
         label: "main",
-        children: [
-            { label: "c1" },
-            { label: "c2" }
-        ]
+        children: [{ label: "c1" }, { label: "c2" }]
     }
 ];
 function formatNodes(nodes) {
@@ -43,17 +38,17 @@ function formatNodes(nodes) {
 }
 exports.formatNodes = formatNodes;
 function isNodeClosed($node) {
-    return (($node.is("li.jqtree-folder.jqtree-closed")) &&
-        ($node.find("a:eq(0)").is("a.jqtree-toggler.jqtree-closed")) &&
-        ($node.find("ul:eq(0)").is("ul")));
+    return ($node.is("li.jqtree-folder.jqtree-closed") &&
+        $node.find("a:eq(0)").is("a.jqtree-toggler.jqtree-closed") &&
+        $node.find("ul:eq(0)").is("ul"));
 }
 exports.isNodeClosed = isNodeClosed;
 function isNodeOpen($node) {
-    return (($node.is("li.jqtree-folder")) &&
-        ($node.find("a:eq(0)").is("a.jqtree-toggler")) &&
-        ($node.find("ul:eq(0)").is("ul")) &&
-        (!$node.is("li.jqtree-folder.jqtree-closed")) &&
-        (!$node.find("span:eq(0)").is("a.jqtree-toggler.jqtree-closed")));
+    return ($node.is("li.jqtree-folder") &&
+        $node.find("a:eq(0)").is("a.jqtree-toggler") &&
+        $node.find("ul:eq(0)").is("ul") &&
+        !$node.is("li.jqtree-folder.jqtree-closed") &&
+        !$node.find("span:eq(0)").is("a.jqtree-toggler.jqtree-closed"));
 }
 exports.isNodeOpen = isNodeOpen;
 function formatTitles($node) {
