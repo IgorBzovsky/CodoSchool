@@ -20,6 +20,7 @@ namespace CodoSchool.Data
 
         public ISectionTypesRepository SectionTypes { get; private set; }
 
+
         public int Complete()
         {
             return _context.SaveChanges();

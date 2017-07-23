@@ -13,6 +13,8 @@ using CodoSchool.Data;
 using CodoSchool.Models;
 using CodoSchool.Services;
 using CodoSchool.Data.Abstractions;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
 
 namespace CodoSchool
 {
@@ -56,11 +58,23 @@ namespace CodoSchool
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddMvc();
 
+           
+            // Adds a default in-memory implementation of IDistributedCache.
+            services.AddDistributedMemoryCache();
+
+            //Add sessiom for project
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.CookieHttpOnly = true;
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddTransient<MenuService>();
             services.AddTransient<LessonsService>();
+            services.AddTransient<QuizService>();
             services.AddTransient<AdminService>();
         }
 
@@ -84,6 +98,8 @@ namespace CodoSchool
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            app.UseSession();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 

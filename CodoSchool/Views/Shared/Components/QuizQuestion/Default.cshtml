@@ -7,7 +7,7 @@
 
 <form asp-area="" asp-controller="Home" asp-action="Quiz" method="get" id="quizForm">
     <div style="width:100%;padding:5%; max-width:100%;word-wrap:break-word">
-        <h2>Question: @(ViewBag.questionIndex+1)/@ViewBag.questionsCount</h2>
+        <h2>Question: @(ViewBag.questionIndex + 1)/@ViewBag.questionsCount</h2>
         <input type="hidden" name="question" value="@currQuestion" />
 
         <p>@Model.QuestionText</p>
@@ -16,7 +16,7 @@
         {
             if (ViewBag.answerid == i)
             {
-                <input type="radio" name="answer" value="@i" checked/>
+                <input type="radio" name="answer" value="@i" checked />
             }
             else
             {
@@ -32,7 +32,8 @@
 
 
         <button type="submit" class="btn btn-link navbar-btn navbar-link" onclick="questionChange(-1)">Previous</button>
-        @if (ViewBag.questionsCount != ViewBag.questionIndex + 1) {
+        @if (ViewBag.questionsCount != ViewBag.questionIndex + 1)
+        {
             <button type="submit" class="btn btn-link navbar-btn navbar-link" onclick="questionChange(1)">Next</button>
         }
         else
@@ -42,7 +43,7 @@
 
 
     </div>
-    
+
 
 </form>
 

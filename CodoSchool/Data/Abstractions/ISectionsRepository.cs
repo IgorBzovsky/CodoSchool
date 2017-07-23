@@ -11,5 +11,6 @@ namespace CodoSchool.Data.Abstractions
         IEnumerable<Section> GetAllSections();
         IEnumerable<Section> GetCategoriesAndCourses();
         IEnumerable<Section> GetCourseLessons(int id);
+        IEnumerable<Question> GetQuestions(int quizID);
     }
 }

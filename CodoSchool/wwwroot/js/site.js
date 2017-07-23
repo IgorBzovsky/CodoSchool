@@ -115,7 +115,8 @@ var QuizController = function () {
             var selectedIndex = resArr[2];
             var param = "?question=" + currentQuestion + "&answer= " + selectedIndex;
 
-                e.preventDefault();
+            e.preventDefault();
+            console.log($(this).attr("action") + param);
                 $.ajax({
                     url: $(this).attr("action") + param,
                     data: $(this).serialize(),
