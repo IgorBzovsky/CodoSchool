@@ -115,7 +115,7 @@ var MenuController = function () {
         });
     }
 
-    };
+    
 
     var loadWelcomePage = function () {
         $.ajax({
@@ -131,10 +131,12 @@ var MenuController = function () {
             }
         });
     };
-//    return {
-//        initialize: initialize
-//    };
-//}();
+    return {
+        initialize: initialize
+    };
+}();
+
+
 var QuizController = function () {
     function formSubmitHandler() {
         

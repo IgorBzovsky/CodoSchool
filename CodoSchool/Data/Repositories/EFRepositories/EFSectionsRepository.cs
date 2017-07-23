@@ -63,6 +63,7 @@ namespace CodoSchool.Data.Repositories.EFRepositories
         public IEnumerable<Question> GetQuestions(int quizID)
         {
             var quizSection = Context.Set<Section>().Find(quizID);
+
             var questions = Context.Set<Question>().Where(x => x.SectionId == quizSection.Id).Include(x => x.Answers);
 
             return questions;
