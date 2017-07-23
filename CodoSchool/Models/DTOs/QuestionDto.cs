@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace CodoSchool.Models.DTOs
         public int? CorrectAnswerId { get; set; }
         public List<AnswerDto> Answers { get; set; }
 
-        public QuestionDto()
+        public AdminQuestionDto()
         {
             Answers = new List<AnswerDto>();
         }

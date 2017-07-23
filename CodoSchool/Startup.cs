@@ -66,7 +66,7 @@ namespace CodoSchool
             //Add sessiom for project
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                //options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.CookieHttpOnly = true;
             });
 

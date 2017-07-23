@@ -27,12 +27,12 @@ namespace CodoSchool.Models.DTOs
         public SectionTypeDto SectionType { get; set; }
 
         public List<SectionDto> Children { get; set; }
-        public List<QuestionDto> Questions { get; set; }
+        public List<AdminQuestionDto> Questions { get; set; }
 
         public SectionDto()
         {
             Children = new List<SectionDto>();
-            Questions = new List<QuestionDto>();
+            Questions = new List<AdminQuestionDto>();
         }
     }
 }
