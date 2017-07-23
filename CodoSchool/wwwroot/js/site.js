@@ -58,8 +58,13 @@ var MenuController = function () {
                     goToCourse(event.node);
                     break;
                 case "TextLesson":
+                    goToLesson(event.node);
+                    break;
                 case "VideoLesson":
                     loadContent(event.node);
+                    break;
+                case "Quiz":
+                    goToQuiz(event.node);
                     break;
             }
         });
@@ -92,6 +97,24 @@ var MenuController = function () {
                 alert(thrownError);
             }
         });
+    }
+
+    var goToQuiz = function (node) {
+
+        $.ajax({
+            url: '/Home/Quiz/' + node.id,
+            dataType: "html",
+            type: 'GET',
+            success: function (data) {
+                $(contentPlaceholderId).html(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+            }
+        });
+    }
+
     };
 
     var loadWelcomePage = function () {
@@ -111,6 +134,37 @@ var MenuController = function () {
     return {
         initialize: initialize
     };
+}();
+var QuizController = function () {
+    function formSubmitHandler() {
+        
+        $("#quizForm").on("submit", function (e) {
+            var regExp = /^question=([-]*\d+)&answer=(\d).*$/;
+            var form = $("#quizForm").serialize();
+            //console.log(form);
+            var resArr = regExp.exec(form);
+            var currentQuestion = resArr[1];
+            var selectedIndex = resArr[2];
+            var param = "?question=" + currentQuestion + "&answer= " + selectedIndex;
+
+            e.preventDefault();
+            console.log($(this).attr("action") + param);
+                $.ajax({
+                    url: $(this).attr("action") + param,
+                    data: $(this).serialize(),
+                    type: $(this).attr("method")
+                })
+                    .done(function (result) {
+                        
+                        $("#content-block").html(result);
+                    })
+            });
+        
+    };
+
+    return {
+        submitHandler: formSubmitHandler
+    }
 }();
 
 

@@ -16,6 +16,9 @@ namespace CodoSchool
             CreateMap<SectionType, SectionTypeDto>();
             CreateMap<Section, TextLessonDto>();
             CreateMap<Section, VideoLessonDto>();
+            CreateMap<Question, QuestionDto>();
+
+            
             CreateMap<Section, CourseDto>();
             CreateMap<Section, SectionDto>().PreserveReferences();
             CreateMap<Question, QuestionDto>().PreserveReferences();
