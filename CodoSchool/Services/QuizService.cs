@@ -40,18 +40,21 @@ namespace CodoSchool.Services
 
         }
 
-        public List<object> GetQuizResult(int id, string userId , int [] answers)
+        public List<object> GetQuizResult(int id, string userId, int[] answers)
         {
             var questions = _context.Sections.GetQuestions(id).ToList();
             int correctAnswersCount = 0;
-            for (int i = 0; i < questions.Count(); i++)
+
+            for (int i = 0; i < answers.Length; i++)
             {
+
                 if (questions[i].Answers[answers[i]].IsCorrect == true)
                 {
                     correctAnswersCount++;
                 }
             }
-            float grade = (correctAnswersCount / questions.Count() * 100);
+            
+            float grade = ((float)correctAnswersCount / (float)questions.Count() * 100);
             bool quizCompleted = grade >= 75;
             if (quizCompleted)
             {
@@ -66,19 +69,19 @@ namespace CodoSchool.Services
                 }
                 _context.Complete();
             }
-            
 
-             
-            return  new List<object> { correctAnswersCount, questions.Count(), grade };
+
+
+            return new List<object> { correctAnswersCount, questions.Count(), grade };
         }
 
-        
+
 
         public SectionDto GetQuiz(int id)
         {
             return _mapper.Map<Section, SectionDto>(_context.Sections.GetSection(id));
         }
-            
+
 
     }
 }
