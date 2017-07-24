@@ -241,3 +241,18 @@ label {
         display: none;
     }
 }
+
+#rotateText {
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    margin: 100% 0 100% 100%;
+    font-size: larger;
+}
+
+.scroll {
+
+    /*overflow: hidden;*/
+    overflow-y: initial;
+
+}

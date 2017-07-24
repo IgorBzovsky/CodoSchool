@@ -20,7 +20,7 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -44,8 +44,40 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - CodoSchool</p>
-        </footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-xs-6">
+                        <h3>ABOUT US</h3>
+                        <p>The subject of development is the Internet site "CodeHipster" of the company "17ST18P", with a dynamic content management system based on the web interface. The purpose of the site: training with the ability to test and assess applicants, the systematic placement of data on programs and techniques for special training, dialogue and interaction</p>
+                        <br>
+                    </div>                    
+                    <div class="col-md-3 col-xs-6 col-md-offset-1">
+                            <h3 class="footer-heading">CONTACT US</h3>
+                            <ul class="list-unstyled">
+                                <li>
+                                    Teatralna strit, 34 academy "Step"
+                                    <br>Vinnitsya, NY 20000
+                                </li>
+                                <li>Phone: (0432) 888 - 888</li>
+                                <li>Email: email@yourdomain.com</li>
+                            </ul>
+                        </div>
+                    <div class="col-md-2 col-xs-10" style="text-align:center; align-content:center">
+                        <h3 style="text-align:center">SOCIAL</h3>                        
+                            <ul class="list-inline social-icons">
+                                <li style="margin: 10px; float: left"><a href="https://www.facebook.com/comp.academy.step/" ><img src="~/images/Facebook-icon.png" title="Facebook" alt="additional title" style="width: 50px; margin-left: -20%; float: right " /></a></li>
+                                <li style="margin: 10px; float: left"><a href="https://plus.google.com/101697631189976317300" ><img src="~/images/google.png" title="Google" alt="additional title" style="width: 50px; float: right " /></a></li>
+                                <li style="margin: 10px; float: left"><a href="https://en.wikipedia.org/wiki/ASP.NET" ><img src="~/images/Wikipedia_logo_silver.png" title="Wikipedia" alt="additional title" style="width: 50px; float: right " /></a></li>
+                            </ul>                        
+                    </div>
+                    <div class="col-md-2 col-xs-2 navbar-brand">
+                        <div id="rotateText">
+                         <p class="codo">_CodoSchool</p>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+</footer>
     </div>
 
     <environment names="Development">
