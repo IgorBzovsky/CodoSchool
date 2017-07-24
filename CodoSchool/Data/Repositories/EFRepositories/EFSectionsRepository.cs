@@ -69,6 +69,11 @@ namespace CodoSchool.Data.Repositories.EFRepositories
             return questions;
         }
 
+        public Section GetSection(int id)
+        {
+            return Context.Set<Section>().Find(id);
+        }
+
 
     }
 }

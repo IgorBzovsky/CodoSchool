@@ -11,5 +11,6 @@ namespace CodoSchool.Models
         public virtual Section Section { get; set; }
         public string ApplicationUserId { get; set; }
         public int SectionId { get; set; }
+        public bool Completed { get; set; }
     }
 }

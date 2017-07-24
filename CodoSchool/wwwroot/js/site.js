@@ -141,13 +141,19 @@ var QuizController = function () {
     function formSubmitHandler() {
         
         $("#quizForm").on("submit", function (e) {
-            var regExp = /^question=([-]*\d+)&answer=(\d).*$/;
+            var regExp = /^question=([-]*\d+)&previousQuestion=(\d+)&answer=(\d+)&quizStatus=(\d+).*$/;
             var form = $("#quizForm").serialize();
             //console.log(form);
             var resArr = regExp.exec(form);
             var currentQuestion = resArr[1];
-            var selectedIndex = resArr[2];
-            var param = "?question=" + currentQuestion + "&answer= " + selectedIndex;
+            var previousQuestion = resArr[2];
+            var selectedIndex = resArr[3];
+            var quizStatus = resArr[4];
+            var param =
+                "?question=" + currentQuestion +
+                "&previousQuestion=" + previousQuestion +
+                "&answer=" + selectedIndex +
+                "&quizStatus=" + quizStatus;
 
             e.preventDefault();
             console.log($(this).attr("action") + param);
@@ -157,7 +163,7 @@ var QuizController = function () {
                     type: $(this).attr("method")
                 })
                     .done(function (result) {
-                        
+                        console.log($("#content-block"));
                         $("#content-block").html(result);
                     })
             });

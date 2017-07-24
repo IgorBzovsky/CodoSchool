@@ -24,8 +24,8 @@ namespace CodoSchool.Controllers
         public HomeController(
                LessonsService lessonsService,
                QuizService quizService)
-            //,
-               //CookieTempDataProvider cookieTempDataProvider)
+        //,
+        //CookieTempDataProvider cookieTempDataProvider)
         {
             _lessonsService = lessonsService;
             _quizService = quizService;
@@ -55,84 +55,87 @@ namespace CodoSchool.Controllers
             return View();
         }
 
+
         public IActionResult Quiz(int id)
         {
-            HttpContext.Session.Clear();
-            int answerIndex, questionIndex, questionsCount;
-            questionsCount = _quizService.GetQuestionsCount(id);
 
 
-            int.TryParse(Request.Query["answer"].FirstOrDefault(), out answerIndex);
-            int.TryParse(Request.Query["question"].FirstOrDefault(), out questionIndex);
-            var t = Request.Query["question"].FirstOrDefault();
+            /*
+            quizStatus values
+            0 - start quiz
+            1 - in progress
+            2 - complete
+            */
+            int quizStatus;
+            int.TryParse(Request.Query["quizStatus"].FirstOrDefault(), out quizStatus);
+            TempData["Status"] = quizStatus;
+
+            switch (quizStatus)
+            {
+                case 0:
+                    {
+                        TempData["Dscription"] = _quizService.GetQuiz(id).Description;
+                        TempData.Save();
+                        return ViewComponent("QuizQuestion", null);
+                    }
+                case 1:
+                    {
+                        int answerIndex, questionIndex, questionsCount, previousQuestion;
+                        questionsCount = _quizService.GetQuestionsCount(id);
+
+
+                        int.TryParse(Request.Query["answer"].FirstOrDefault(), out answerIndex);
+                        int.TryParse(Request.Query["question"].FirstOrDefault(), out questionIndex);
+                        int.TryParse(Request.Query["previousQuestion"].FirstOrDefault(), out previousQuestion);
+
+                        TempData["questionIndex"] = questionIndex >= 0 ?
+                        questionIndex <= questionsCount ? questionIndex : questionsCount
+                        : 0;
+
+
+                        TempData["questionsCount"] = questionsCount;
+
+                        QuestionDto currentQuestion = _quizService.ProvideQuestion(id, questionIndex);
+
+                        if (TempData.Peek("answers") == null || ((int[])TempData.Peek("answers")).Length != questionsCount)
+                        {
+                            List<int> answers = new List<int>();
+                            for (int i = 0; i < questionsCount; i++)
+                            {
+                                answers.Add(0);
+                            }
+                            TempData["answers"] = answers;
+                        }
+                        else
+                        {
+                            var answers = TempData["answers"] as int[];
+                            answers[previousQuestion] = answerIndex;
+                            TempData["answers"] = answers;
+                        }
+
+
+                        TempData.Save();
+
+                        return ViewComponent("QuizQuestion", currentQuestion);
+                    }
+                case 2:
+                    {
+                        var answers = TempData["answers"] as int[];
+                        //HttpContext.User.Identity.
+                            
+                       // _quizService.GetQuizResult(id, )
+
+
+                        TempData.Save();
+                        return ViewComponent("QuizQuestion", null);
+                    }
+                default:
+                    return null;
+            }
+
+
             
-
-
-
-            //var tmp = TempData.Peek("currentQuiz");
-
-            //if (tmp == null)
-            //{
-            //    TempData.Add("currentQuiz", new Dictionary<int, int>());
-            //    for (int i = 0; i < _quizService.GetQuestionsCount(id); i++)
-            //    {
-            //        (TempData["currentQuiz"] as Dictionary<int, int>).Add(i, 0);
-            //    }
-
-            //}
-            //else
-            //{
-            //    (TempData["currentQuiz"] as Dictionary<int, int>)[questionIndex] = answerIndex;
-
-            //}
-
-
-
-            #region MyRegion
-
-            //ViewBag.answerid = Index;
-            //var _tempData = _cookieTempDataProvider.LoadTempData(HttpContext);
-            //Dictionary<int, int> userAnswers = _tempData["currentQuiz"] as Dictionary<int, int>;
-            //if (userAnswers == null)
-            //{
-            //    userAnswers = new Dictionary<int, int>();
-            //    for (int i = 0; i < _quizService.GetQuestionsCount(id); i++)
-            //    {
-            //        userAnswers.Add(i, 0);
-            //    }
-            //    _tempData.Add("currentQuiz", userAnswers);
-            //}
-            //else
-            //{
-            //    userAnswers[questionIndex] = answerIndex;
-            //    _tempData["currentQuiz"] = userAnswers;
-            //}
-
-
-            //ViewBag.answerid = userAnswers[questionIndex];
-            //_cookieTempDataProvider.SaveTempData(HttpContext, _tempData);
-
-            #endregion
-
-            //ViewBag.questionIndex
-
-            TempData["questionIndex"] = questionIndex >= 0 ?
-            questionIndex <= questionsCount ? questionIndex : questionsCount
-            : 0;
-
-            //ViewBag.questionsCount 
-
-            //TempData["questionIndex"] = questionIndex;
-            TempData["questionsCount"] = questionsCount;
-
-            QuestionDto currentQuestion = _quizService.ProvideQuestion(id, questionIndex);
-            
-            //TempData.Save();
-            TempData.Keep();
-
-            return ViewComponent("QuizQuestion", currentQuestion);
         }
-
 
         public IActionResult TextLesson(int id)
         {
@@ -159,5 +162,7 @@ namespace CodoSchool.Controllers
         }
 
         public IActionResult Welcome() => PartialView("_Welcome");
+
+
     }
 }

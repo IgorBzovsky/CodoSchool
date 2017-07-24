@@ -1,0 +1,38 @@
+﻿@{ 
+
+}
+<form asp-area="" asp-controller="Home" asp-action="Quiz" method="get" id="quizForm">
+    <div style="width:100%;padding:5%; max-width:100%;word-wrap:break-word">
+        
+        <input type="hidden" name="question" value="0"/>
+        <input type="hidden" name="previousQuestion" value="0" />
+
+
+        <p>Try to do it ;)</p>
+        <p>@ViewBag.description</p>
+
+      
+
+
+
+        <button type="submit" class="btn btn-link navbar-btn navbar-link" onclick="questionChange()">Start</button>
+        
+
+
+
+    </div>
+    <input type="hidden" name="answer" value="0" />
+    <input type="hidden" name="quizStatus" value="1" />
+</form>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        QuizController.submitHandler();
+    });
+
+    function questionChange() {
+        $('[name=question]').val(0);
+    }
+
+</script>

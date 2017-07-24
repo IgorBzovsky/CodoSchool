@@ -23,18 +23,40 @@ namespace CodoSchool.ViewComponents
         public Task<IViewComponentResult> InvokeAsync(QuestionDto _quizQuestion)
         {
 
-            //ViewBag.questionIndex = TempData.Peek("questionIndex");
-            //ViewBag.answerid = (TempData.Peek("currentQuiz") as Dictionary<int, int>)[ViewBag.questionIndex];
-            //ViewBag.questionsCount = TempData.Peek("questionsCount");
-
-            ViewBag.questionIndex = TempData.Peek("questionIndex");
-            ViewBag.questionsCount = TempData.Peek("questionsCount");
-            ViewBag.answerid = 0;
-            TempData.Keep();
 
 
-            return Task.FromResult<IViewComponentResult>(View("Default", _quizQuestion));
+
+            switch ((int)TempData.Peek("Status"))
+            {
+                case 0:
+                    ViewBag.description = TempData.Peek("Dscription");
+                    HttpContext.Session.Clear();
+                    return Task.FromResult<IViewComponentResult>(View("StartQuiz"));
+
+
+                case 1:
+                    ViewBag.questionIndex = TempData.Peek("questionIndex");
+                    ViewBag.questionsCount = TempData.Peek("questionsCount");
+                    ViewBag.asnwers = TempData.Peek("answers");
+                    ViewBag.answerIndex = ViewBag.asnwers[ViewBag.questionIndex];
+
+                    TempData.Save();
+
+                    return Task.FromResult<IViewComponentResult>(View("Default", _quizQuestion));
+
+
+                case 2:
+
+                    HttpContext.Session.Clear();
+                    return Task.FromResult<IViewComponentResult>(View("CompleteQuiz"));
+            }
+
+            return null;
 
         }
+
+
+
+
     }
 }

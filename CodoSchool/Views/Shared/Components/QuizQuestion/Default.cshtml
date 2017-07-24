@@ -8,13 +8,14 @@
 <form asp-area="" asp-controller="Home" asp-action="Quiz" method="get" id="quizForm">
     <div style="width:100%;padding:5%; max-width:100%;word-wrap:break-word">
         <h2>Question: @(ViewBag.questionIndex + 1)/@ViewBag.questionsCount</h2>
-        <input type="hidden" name="question" value="@currQuestion" />
+        <input type="hidden" name="question"/>
+        <input type="hidden" name="previousQuestion" value="@currQuestion" />
 
         <p>@Model.QuestionText</p>
 
         @for (var i = 0; i < Model.Answers.Count; i++)
         {
-            if (ViewBag.answerid == i)
+            if (ViewBag.answerIndex == i)
             {
                 <input type="radio" name="answer" value="@i" checked />
             }
@@ -26,9 +27,6 @@
             <br />
 
         }
-
-        <h1>Answer id is : @ViewBag.answerid</h1>
-
 
 
         <button type="submit" class="btn btn-link navbar-btn navbar-link" onclick="questionChange(-1)">Previous</button>
@@ -44,7 +42,7 @@
 
     </div>
 
-
+    <input type="hidden" name="quizStatus" value="1" />
 </form>
 
 <script type="text/javascript">
@@ -55,6 +53,10 @@
 
     function questionChange(step) {
         $('[name=question]').val(@currQuestion+step);
+    }
+    function completeQuiz() {
+        $('[name=quizStatus]').val(2);
+
     }
 
 </script>
