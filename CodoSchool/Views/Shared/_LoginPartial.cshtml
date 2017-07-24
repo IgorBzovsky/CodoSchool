@@ -20,11 +20,8 @@
                         {
                             <li><a asp-controller="Sections" asp-action="Index">Admin   panel</a></li>
                         }
-                        else
-                        {
-                            <li><a asp-controller="Account" asp-action="Statistics">Progress</a></li>
-                        }
                     }
+                    <li><a asp-controller="Account" asp-action="Statistics">Progress</a></li>
                     <li role="separator" class="divider"></li>
                     <li>
                         <a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
