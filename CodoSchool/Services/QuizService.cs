@@ -40,9 +40,9 @@ namespace CodoSchool.Services
 
         }
 
-        public object GetQuizResult(int id,int userId , int [] answers)
+        public List<object> GetQuizResult(int id, string userId , int [] answers)
         {
-            var questions = _context.Sections.GetQuestions(id)  as Question [];
+            var questions = _context.Sections.GetQuestions(id).ToList();
             int correctAnswersCount = 0;
             for (int i = 0; i < questions.Count(); i++)
             {
@@ -51,25 +51,25 @@ namespace CodoSchool.Services
                     correctAnswersCount++;
                 }
             }
-            int grade = (correctAnswersCount / questions.Count() * 100);
+            float grade = (correctAnswersCount / questions.Count() * 100);
             bool quizCompleted = grade >= 75;
             if (quizCompleted)
             {
-                var _studentProgress = _context.StudentProgress.Find(x => x.SectionId == id && x.ApplicationUserId == userId.ToString()).FirstOrDefault();
+                var _studentProgress = _context.StudentProgress.Find(x => x.SectionId == id && x.ApplicationUserId == userId).FirstOrDefault();
                 if (_studentProgress != null)
                 {
                     _studentProgress.Completed = quizCompleted;
                 }
                 else
                 {
-                    _context.StudentProgress.Add(new StudentProgress { ApplicationUserId = userId.ToString(), SectionId = id });
+                    _context.StudentProgress.Add(new StudentProgress { ApplicationUserId = userId, SectionId = id });
                 }
                 _context.Complete();
             }
             
 
              
-            return new int [correctAnswersCount, questions.Count(), grade];
+            return  new List<object> { correctAnswersCount, questions.Count(), grade };
         }
 
         

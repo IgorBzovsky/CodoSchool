@@ -11,6 +11,8 @@ using CodoSchool.Models.DTOs;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using CodoSchool.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace CodoSchool.Controllers
 {
@@ -18,17 +20,20 @@ namespace CodoSchool.Controllers
     {
         LessonsService _lessonsService;
         QuizService _quizService;
+        UserManager<ApplicationUser> _userManager;
         //CookieTempDataProvider _cookieTempDataProvider;
 
 
         public HomeController(
                LessonsService lessonsService,
-               QuizService quizService)
+               QuizService quizService,
+               UserManager<ApplicationUser> userManager)
         //,
         //CookieTempDataProvider cookieTempDataProvider)
         {
             _lessonsService = lessonsService;
             _quizService = quizService;
+            _userManager = userManager;
             //_cookieTempDataProvider = cookieTempDataProvider;
         }
         public IActionResult Index()
@@ -92,6 +97,7 @@ namespace CodoSchool.Controllers
                         questionIndex <= questionsCount ? questionIndex : questionsCount
                         : 0;
 
+                       
 
                         TempData["questionsCount"] = questionsCount;
 
@@ -121,10 +127,9 @@ namespace CodoSchool.Controllers
                 case 2:
                     {
                         var answers = TempData["answers"] as int[];
-                        //HttpContext.User.Identity.
-                            
-                       // _quizService.GetQuizResult(id, )
+                        var userID = _userManager.GetUserId(User);
 
+                        _quizService.GetQuizResult(id, userID, answers);
 
                         TempData.Save();
                         return ViewComponent("QuizQuestion", null);

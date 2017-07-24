@@ -163,7 +163,7 @@ var QuizController = function () {
                     type: $(this).attr("method")
                 })
                     .done(function (result) {
-                        console.log($("#content-block"));
+                        
                         $("#content-block").html(result);
                     })
             });

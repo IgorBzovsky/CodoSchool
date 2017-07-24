@@ -36,7 +36,7 @@
         }
         else
         {
-            <button type="submit" class="btn btn-link navbar-btn navbar-link" onclick="questionChange(1)">Complete</button>
+            <button type="submit" class="btn btn-link navbar-btn navbar-link" onclick="completeQuiz()">Complete</button>
         }
 
 
@@ -55,6 +55,7 @@
         $('[name=question]').val(@currQuestion+step);
     }
     function completeQuiz() {
+        $('[name=question]').val(0);
         $('[name=quizStatus]').val(2);
 
     }
